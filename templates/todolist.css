@@ -30,7 +30,13 @@ span{
 	transition: 0.2s linear;
 	opacity: 0;
 }
+
 li:hover span{
+	width:40px;
+	height: 40px;
+	opacity: 1.0;
+
+}li:hover button{
 	width:40px;
 	height: 40px;
 	opacity: 1.0;

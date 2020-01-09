@@ -15,18 +15,36 @@
 	<form action="/addtodo/" method="post">
 		{%csrf_token%}
 		<input type="text" placeholder="    Add New ToDo" name="content">
-		<input type="submit" value="add">
+		<!--<input type="submit" value="add">-->
 	</form>
 	<ul>
 		{%for item in items%}
-			<li><span><i class="far fa-trash-alt"></i></span> {{item.content}}
 			<form action="/deletetodo/{{item.id}}/" method="post">
 				{%csrf_token%}
-				<input type="submit" value="delete">
+				<li><span><button style="background:#e74c3c;border:none;padding:0;transition: 2s linear;height: 40px;width:40px;outline:none;">
+					<i class="far fa-trash-alt"></i>
+				</button>
+				</span> {{item.content}}
 			</form>
 			</li>
+			<script>
+					$("span").on("click",function(){
+					$(this).parent().fadeOut(2000,function(){
+						$(this).remove();
+						})
+					})
+				</script>
 		{%endfor%}
 	</ul>
+	<script>
+		$("body").on("keypress","input",function(event){
+			if(event.which===13)
+				{
+					$(this).form.submit()
+				}
+		})
+
+	</script>
 
 </div>
 <script type="text/javascript" src="{%static 'todolist.js' %}"></script>
