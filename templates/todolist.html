@@ -1,0 +1,35 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>To DO list</title>
+	<script type="text/javascript" src="{%static 'jquery' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{%static 'todolist.css' %}">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+</head>
+<body>
+<div id="container">
+	<h1>TO-DO-LIST
+	<i class="far fa-plus-square"></i>
+	</h1>
+	<form action="/addtodo/" method="post">
+		{%csrf_token%}
+		<input type="text" placeholder="    Add New ToDo" name="content">
+		<input type="submit" value="add">
+	</form>
+	<ul>
+		{%for item in items%}
+			<li><span><i class="far fa-trash-alt"></i></span> {{item.content}}
+			<form action="/deletetodo/{{item.id}}/" method="post">
+				{%csrf_token%}
+				<input type="submit" value="delete">
+			</form>
+			</li>
+		{%endfor%}
+	</ul>
+
+</div>
+<script type="text/javascript" src="{%static 'todolist.js' %}"></script>
+
+</body>
+</html>
